@@ -147,7 +147,7 @@ public:
 };
 
 #define MY_QUERYINTERFACE_BEGIN STDMETHOD(QueryInterface) \
-    (REFGUID iid, void **outObject) {
+    (REFGUID iid, void **outObject) override {
 
 #define MY_QUERYINTERFACE_ENTRY(i) if (iid == IID_ ## i) \
     { *outObject = (void *)(i *)this; AddRef(); return S_OK; }
@@ -155,8 +155,8 @@ public:
 #define MY_QUERYINTERFACE_END return E_NOINTERFACE; }
 
 #define MY_ADDREF_RELEASE \
-STDMETHOD_(ULONG, AddRef)() { return ++__m_RefCount; } \
-STDMETHOD_(ULONG, Release)() { \
+STDMETHOD_(ULONG, AddRef)() override { return ++__m_RefCount; } \
+STDMETHOD_(ULONG, Release)() override { \
   if (--__m_RefCount != 0) return __m_RefCount; \
   delete this; return 0; }
 
@@ -167,7 +167,7 @@ STDMETHOD_(ULONG, Release)() { \
   MY_ADDREF_RELEASE
 
 
-#define MY_UNKNOWN_IMP STDMETHOD(QueryInterface)(REFGUID, void **) { \
+#define MY_UNKNOWN_IMP STDMETHOD(QueryInterface)(REFGUID, void **) override { \
   MY_QUERYINTERFACE_END \
   MY_ADDREF_RELEASE
 

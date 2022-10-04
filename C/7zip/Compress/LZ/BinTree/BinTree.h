@@ -31,26 +31,26 @@ class CMatchFinder:
 
   MY_UNKNOWN_IMP
 
-  STDMETHOD(SetStream)(ISequentialInStream *inStream);
-  STDMETHOD_(void, ReleaseStream)();
-  STDMETHOD(Init)();
+  STDMETHOD(SetStream)(ISequentialInStream *inStream) override;
+  STDMETHOD_(void, ReleaseStream)() override;
+  STDMETHOD(Init)() override;
   HRESULT MovePos();
-  STDMETHOD_(Byte, GetIndexByte)(Int32 index);
-  STDMETHOD_(UInt32, GetMatchLen)(Int32 index, UInt32 back, UInt32 limit);
-  STDMETHOD_(UInt32, GetNumAvailableBytes)();
-  STDMETHOD_(const Byte *, GetPointerToCurrentPos)();
-  STDMETHOD_(Int32, NeedChangeBufferPos)(UInt32 numCheckBytes);
-  STDMETHOD_(void, ChangeBufferPos)();
+  STDMETHOD_(Byte, GetIndexByte)(Int32 index) override;
+  STDMETHOD_(UInt32, GetMatchLen)(Int32 index, UInt32 back, UInt32 limit) override;
+  STDMETHOD_(UInt32, GetNumAvailableBytes)() override;
+  STDMETHOD_(const Byte *, GetPointerToCurrentPos)() override;
+  STDMETHOD_(Int32, NeedChangeBufferPos)(UInt32 numCheckBytes) override;
+  STDMETHOD_(void, ChangeBufferPos)() override;
 
   STDMETHOD(Create)(UInt32 historySize, UInt32 keepAddBufferBefore,
-      UInt32 matchMaxLen, UInt32 keepAddBufferAfter);
-  STDMETHOD(GetMatches)(UInt32 *distances);
-  STDMETHOD(Skip)(UInt32 num);
+      UInt32 matchMaxLen, UInt32 keepAddBufferAfter) override;
+  STDMETHOD(GetMatches)(UInt32 *distances) override;
+  STDMETHOD(Skip)(UInt32 num) override;
 
 public:
   CMatchFinder();
   virtual ~CMatchFinder();
-  virtual void SetNumPasses(UInt32 numPasses) { _cutValue = numPasses; }
+  virtual void SetNumPasses(UInt32 numPasses) override { _cutValue = numPasses; }
 };
 
 }

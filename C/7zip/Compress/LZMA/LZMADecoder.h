@@ -228,18 +228,21 @@ public:
 
   STDMETHOD(Code)(ISequentialInStream *inStream,
       ISequentialOutStream *outStream, const UInt64 *inSize, const UInt64 *outSize,
-      ICompressProgressInfo *progress);
+      ICompressProgressInfo *progress) override;
 
-  STDMETHOD(SetDecoderProperties2)(const Byte *data, UInt32 size);
+  STDMETHOD(SetDecoderProperties2)(const Byte *data, UInt32 size) override;
 
-  STDMETHOD(GetInStreamProcessedSize)(UInt64 *value);
+  STDMETHOD(GetInStreamProcessedSize)(UInt64 *value) override;
 
+  #ifdef _ST_MODE
+  STDMETHOD(SetInStream)(ISequentialInStream *inStream) override;
+  STDMETHOD(ReleaseInStream)() override;
+  STDMETHOD(SetOutStreamSize)(const UInt64 *outSize) override;
+  STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize) override;
+  #else
   STDMETHOD(SetInStream)(ISequentialInStream *inStream);
   STDMETHOD(ReleaseInStream)();
   STDMETHOD(SetOutStreamSize)(const UInt64 *outSize);
-
-  #ifdef _ST_MODE
-  STDMETHOD(Read)(void *data, UInt32 size, UInt32 *processedSize);
   #endif
 
   CDecoder(): _outSizeDefined(false) {}

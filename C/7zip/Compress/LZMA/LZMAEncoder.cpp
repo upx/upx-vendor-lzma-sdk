@@ -55,7 +55,7 @@ enum
   kHC4
 };
 
-static const wchar_t *kMatchFinderIDs[] =
+static const wchar_t * const kMatchFinderIDs[] =
 {
   L"BT2",
   L"BT3",

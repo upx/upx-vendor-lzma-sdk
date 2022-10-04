@@ -391,17 +391,17 @@ public:
   STDMETHOD(Code)(ISequentialInStream *inStream,
       ISequentialOutStream *outStream,
       const UInt64 *inSize, const UInt64 *outSize,
-      ICompressProgressInfo *progress);
+      ICompressProgressInfo *progress) override;
 
   // ICompressSetCoderProperties2
   STDMETHOD(SetCoderProperties)(const PROPID *propIDs,
-      const PROPVARIANT *properties, UInt32 numProperties);
+      const PROPVARIANT *properties, UInt32 numProperties) override;
 
   // ICompressWriteCoderProperties
-  STDMETHOD(WriteCoderProperties)(ISequentialOutStream *outStream);
+  STDMETHOD(WriteCoderProperties)(ISequentialOutStream *outStream) override;
 
-  STDMETHOD(SetOutStream)(ISequentialOutStream *outStream);
-  STDMETHOD(ReleaseOutStream)();
+  STDMETHOD(SetOutStream)(ISequentialOutStream *outStream) override;
+  STDMETHOD(ReleaseOutStream)() override;
 
   virtual ~CEncoder() {}
 };
