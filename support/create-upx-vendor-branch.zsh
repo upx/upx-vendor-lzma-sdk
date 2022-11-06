@@ -53,7 +53,7 @@ find . -type d -name '.git' -prune -o -type f -print0 | xargs -0r sed -i -e 's/[
 # 6) add files and commmit
 create_warning
 git add .
-u=upx-vendor-bot; m="none@none"; d="$devel_date +0000"
+u='upx-vendor-bot[bot]'; m='none@none'; d="$devel_date +0000"
 GIT_AUTHOR_NAME=$u GIT_COMMITTER_NAME=$u \
 GIT_AUTHOR_EMAIL=$m GIT_COMMITTER_EMAIL=$m \
 GIT_AUTHOR_DATE=$d GIT_COMMITTER_DATE=$d \
