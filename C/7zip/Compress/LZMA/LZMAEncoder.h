@@ -46,7 +46,7 @@ struct COptimal
   UInt32 BackPrev;
   UInt32 Backs[kNumRepDistances];
   void MakeAsChar() { BackPrev = UInt32(-1); Prev1IsChar = false; }
-  void MakeAsShortRep() { BackPrev = 0; ; Prev1IsChar = false; }
+  void MakeAsShortRep() { BackPrev = 0; Prev1IsChar = false; }
   bool IsShortRep() { return (BackPrev == 0); }
 };
 

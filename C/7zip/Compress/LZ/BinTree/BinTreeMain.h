@@ -168,17 +168,17 @@ STDMETHODIMP_(void) CMatchFinder::ReleaseStream()
 #ifdef HASH_ARRAY_2
 #ifdef HASH_ARRAY_3
 
-#define HASH_CALC { \
+#define HASH_CALC do { \
   UInt32 temp = CCRC::Table[cur[0]] ^ cur[1]; \
   hash2Value = temp & (kHash2Size - 1); \
   hash3Value = (temp ^ (UInt32(cur[2]) << 8)) & (kHash3Size - 1); \
-  hashValue = (temp ^ (UInt32(cur[2]) << 8) ^ (CCRC::Table[cur[3]] << 5)) & _hashMask; }
+  hashValue = (temp ^ (UInt32(cur[2]) << 8) ^ (CCRC::Table[cur[3]] << 5)) & _hashMask; } while (false)
 
 #else // no HASH_ARRAY_3
-#define HASH_CALC { \
+#define HASH_CALC do { \
   UInt32 temp = CCRC::Table[cur[0]] ^ cur[1]; \
   hash2Value = temp & (kHash2Size - 1); \
-  hashValue = (temp ^ (UInt32(cur[2]) << 8)) & _hashMask; }
+  hashValue = (temp ^ (UInt32(cur[2]) << 8)) & _hashMask; } while (false)
 #endif // HASH_ARRAY_3
 #else // no HASH_ARRAY_2
 #ifdef HASH_ZIP

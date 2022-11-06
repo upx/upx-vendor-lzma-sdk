@@ -5,7 +5,7 @@
 
 #include "MyWindows.h"
 
-#define RINOK(x) { HRESULT __result_ = (x); if(__result_ != S_OK) return __result_; }
+#define RINOK(x) do { HRESULT __result_ = (x); if(__result_ != S_OK) return __result_; } while (false)
 
 template <class T>
 class CMyComPtr

@@ -29,7 +29,7 @@ public:
       Models[modelIndex].Encode(rangeEncoder, bit);
       modelIndex = (modelIndex << 1) | bit;
     }
-  };
+  }
   void ReverseEncode(CEncoder *rangeEncoder, UInt32 symbol)
   {
     UInt32 modelIndex = 1;
@@ -88,7 +88,7 @@ public:
     }
     RC_FLUSH_VAR
     return modelIndex - (1 << NumBitLevels);
-  };
+  }
   UInt32 ReverseDecode(CDecoder *rangeDecoder)
   {
     UInt32 modelIndex = 1;

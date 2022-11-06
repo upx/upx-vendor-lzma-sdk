@@ -13,7 +13,7 @@ public:
   static UInt32 Table[256];
   static void InitTable();
 
-  CCRC():  _value(0xFFFFFFFF){};
+  CCRC():  _value(0xFFFFFFFF) {}
   void Init() { _value = 0xFFFFFFFF; }
   void UpdateByte(Byte v);
   void UpdateUInt16(UInt16 v);
