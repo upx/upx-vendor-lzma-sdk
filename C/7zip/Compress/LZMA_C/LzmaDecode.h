@@ -45,6 +45,13 @@
 
 #define LZMA_RESULT_OK 0
 #define LZMA_RESULT_DATA_ERROR 1
+#if !defined(_LZMA_OUT_READ) && !defined(UPX_LZMA_COMPAT)
+#define LZMA_RESULT_INPUT_OVERRUN 2  // added for UPX
+#define LZMA_RESULT_OUTPUT_OVERRUN 3 // added for UPX
+#else
+#define LZMA_RESULT_INPUT_OVERRUN 1
+#define LZMA_RESULT_OUTPUT_OVERRUN 1
+#endif
 
 #ifdef _LZMA_IN_CB
 typedef struct _ILzmaInCallback

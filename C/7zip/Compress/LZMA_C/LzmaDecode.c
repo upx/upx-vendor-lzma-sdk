@@ -43,7 +43,7 @@
 
 #else
 
-#define RC_TEST { if (Buffer == BufferLim) return LZMA_RESULT_DATA_ERROR; }
+#define RC_TEST { if (Buffer == BufferLim) return LZMA_RESULT_INPUT_OVERRUN; }
 
 #define RC_INIT(buffer, bufferSize) Buffer = buffer; BufferLim = buffer + bufferSize; RC_INIT2
 
@@ -121,7 +121,7 @@ int LzmaDecodeProperties(CLzmaProperties *propsRes, const unsigned char *propsDa
 {
   unsigned char prop0;
   if (size < LZMA_PROPERTIES_SIZE)
-    return LZMA_RESULT_DATA_ERROR;
+    return LZMA_RESULT_INPUT_OVERRUN;
   prop0 = propsData[0];
   if (prop0 >= (9 * 5 * 5))
     return LZMA_RESULT_DATA_ERROR;
@@ -556,6 +556,9 @@ int LzmaDecode(CLzmaDecoderState *vs,
         outStream[nowPos++] = previousByte;
       }
       while(len != 0 && nowPos < outSize);
+#if !defined(_LZMA_OUT_READ) && !defined(UPX_LZMA_COMPAT)
+      if (len != 0) return LZMA_RESULT_OUTPUT_OVERRUN;
+#endif
     }
   }
   RC_NORMALIZE;
