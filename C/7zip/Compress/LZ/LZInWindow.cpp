@@ -70,7 +70,7 @@ HRESULT CLZInWindow::ReadBlock()
     return S_OK;
   while(true)
   {
-    UInt32 size = (UInt32)(_bufferBase - _buffer) + _blockSize - _streamPos;
+    UInt32 size = (UInt32)((_bufferBase + _blockSize) - (_buffer + _streamPos));
     if(size == 0)
       return S_OK;
     UInt32 numReadBytes;
@@ -95,11 +95,11 @@ HRESULT CLZInWindow::ReadBlock()
 
 void CLZInWindow::MoveBlock()
 {
-  UInt32 offset = (UInt32)(_buffer - _bufferBase) + _pos - _keepSizeBefore;
+  UInt32 offset = (UInt32)((_buffer + _pos) - (_bufferBase + _keepSizeBefore));
   // we need one additional byte, since MovePos moves on 1 byte.
   if (offset > 0)
     offset--;
-  UInt32 numBytes = (UInt32)(_buffer - _bufferBase) + _streamPos -  offset;
+  UInt32 numBytes = (UInt32)((_buffer + _streamPos) - (_bufferBase + offset));
   memmove(_bufferBase, _bufferBase + offset, numBytes);
   _buffer -= offset;
 }
