@@ -28,6 +28,7 @@ public:
   T* operator->() const { return _p; }
   T* operator=(T* p)
   {
+    if (p == _p) return p; // self-assignment
     if (p != NULL)
       p->AddRef();
     if (_p)
@@ -35,7 +36,7 @@ public:
     _p = p;
     return p;
   }
-  T* operator=(const CMyComPtr<T>& lp) { return (*this = lp._p); }
+  T* operator=(const CMyComPtr<T>& lp) { if (this != &lp) *this = lp._p; return *this; }
   bool operator!() const { return (_p == NULL); }
   // bool operator==(T* pT) const {  return _p == pT; }
   // Compare two objects for equivalence
